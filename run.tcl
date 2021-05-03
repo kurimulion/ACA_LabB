@@ -50,7 +50,7 @@ set_part {xc7z020clg484-1}
 create_clock -period 10
 
 # Do not inline update_knn and knn_vote functions 
-set_directive_inline -off update_knn
+# set_directive_inline -off update_knn
 set_directive_inline -off knn_vote
 ### You can add your own directives here ###
 
@@ -80,6 +80,10 @@ set_directive_loop_unroll knn_vote/VOTE_MIN_DIST_CONST_LOOP
 set_directive_loop_unroll knn_vote/VOTE_MIN_DIST_CUR_CONST_LOOP
 set_directive_loop_unroll knn_vote/VOTE_CALC_VOTE_LOOP
 set_directive_loop_unroll knn_vote/VOTE_FIND_MAX_VOTE_LOOP
+
+# Pipeline main update loop
+set_directive_inline update_knn
+set_directive_pipeline digitrec_label0
 
 # Simulate the C++ design
 csim_design
